@@ -16,6 +16,7 @@ const myRequest = (endpoint: string, method: string, token?: string) =>
   new Request(endpoint, myInit(method, token));
 
 const baseUrl = 'http://localhost:3500';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const rejectPromise = (response?: Response): Promise<Response> =>
   Promise.reject({
@@ -25,7 +26,7 @@ const rejectPromise = (response?: Response): Promise<Response> =>
   });
 
 export const login = (email: string, password: string) => {
-  return fetch(myRequest(`${baseUrl}/login`, 'POST'), {
+  return fetch(myRequest(`${API_BASE_URL}/api/login`, 'POST'), {
     body: JSON.stringify({ email, password }),
   })
     .then((response) => {
@@ -41,7 +42,7 @@ export const login = (email: string, password: string) => {
 };
 
 export const createAnUser = (user: User) => {
-  return fetch(myRequest(`${baseUrl}/register`, 'POST'), {
+  return fetch(myRequest(`${API_BASE_URL}/api/users`, 'POST'), {
     body: JSON.stringify(user),
   })
     .then((response) => {

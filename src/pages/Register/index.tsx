@@ -44,7 +44,7 @@ interface RegisterInputs {
   name: string;
   lastName: string;
   phone: string;
-  dni: string;
+  dni: number;
   email: string;
   password: string;
   passwordRepeated: string;
@@ -111,12 +111,13 @@ const Register = () => {
     email,
   }) => {
     setIsSubmiting(true);
+    const parsedDni = parseInt(String(dni));
     createAnUser({
       firstName: name,
       lastName,
       password,
       phone,
-      dni,
+      dni: parsedDni,
       email,
     })
       .then((response) => {
